@@ -1,11 +1,12 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-import urllib.request # besoin d'etre installer
+import urllib.request
 import csv
 import sqlite3
 import urllib.request
 import codecs
+import re
 
 
 #####################################################################################################################################
@@ -139,8 +140,12 @@ def read_File_3(data, db_name):
                         #print(line[l])
                         if('"' in line[l]):
                             #print("coucou")
-                            raise ValueError
-                        rows_value += '"' + line[l] + '"'
+                            # print(re.sub('["{}]', '', line[l]))
+                            # raise ValueError
+                            rows_value += '"' + re.sub('["{}]', '', line[l]) + '"'
+                        else:
+                            rows_value += '"' + line[l] + '"'
+
                         if (l != len(line) - 1):
                             rows_value += ", "
                     #print(i, rows_value)
@@ -165,7 +170,7 @@ def read_File_3(data, db_name):
                 #rows_value = ', '.join(line)
                 #print(rows_value)
 
-                #curseur.execute("INSERT INTO %s (%s) VALUES (%s)" % (tableName, rows, line))
+                curseur.execute("INSERT INTO %s (%s) VALUES (%s)" % (tableName, rows, line))
 
                 rows_value = ""
 
@@ -182,7 +187,7 @@ def read_File_3(data, db_name):
                     if(j != len(line)-1):
                         columns+= ", "
                 #output.write(columns)
-                curseur.execute("CREATE TABLE IF NOT EXISTS %s (%s)" % (tableName, columns) )
+                #curseur.execute("CREATE TABLE IF NOT EXISTS %s (%s)" % (tableName, columns) )
 
                 #c_name = curseur.execute("SELECT * FROM %s" % tableName)
                 #names = list(map(lambda x: x[0], c_name.description))
@@ -191,7 +196,7 @@ def read_File_3(data, db_name):
                 #print(names)
                 #print(columns)
 
-        connexion.close()
+        #connexion.close()
         #output.close()
 
     except FileNotFoundError:
@@ -260,13 +265,15 @@ csvfile3 = csv.reader(codecs.iterdecode(ftpstream3, 'utf-8'), delimiter=";")
 for line in csvfile1:
     print(line)  # do something with line
 
+
 for line in csvfile2:
     print(line)  # do something with line
+
 '''
 
 read_File_3(csvfile1, db_name_1)
-#read_File_3(csvfile2, db_name_2)
-#read_File_3(csvfile3, db_name_3)
+read_File_3(csvfile2, db_name_2)
+read_File_3(csvfile3, db_name_3)
 
 
 '''
