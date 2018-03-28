@@ -110,7 +110,9 @@ def read_File_3(data, db_name):
 
         tableName = db_name
 
-        connexion = sqlite3.connect(db_name)
+        print("création de la base " + db_name + ".db en cours...")
+
+        connexion = sqlite3.connect(db_name + ".db")
         curseur = connexion.cursor()
 
         for i, line in enumerate(reader):
@@ -146,7 +148,7 @@ def read_File_3(data, db_name):
                 # rows_value = ', '.join(line)
                 # print(rows_value)
 
-                curseur.execute("INSERT INTO %s (%s) VALUES (%s)" % (tableName, rows, line))
+                # curseur.execute("INSERT INTO %s (%s) VALUES (%s)" % (tableName, rows, line))
 
                 rows_value = ""
 
@@ -163,7 +165,7 @@ def read_File_3(data, db_name):
                     if j != (len(line) - 1):
                         columns += ", "
                 # output.write(columns)
-                # curseur.execute("CREATE TABLE IF NOT EXISTS %s (%s)" % (tableName, columns) )
+                curseur.execute("CREATE TABLE IF NOT EXISTS %s (%s)" % (tableName, columns))
 
                 # c_name = curseur.execute("SELECT * FROM %s" % tableName)
                 # names = list(map(lambda x: x[0], c_name.description))
@@ -172,8 +174,11 @@ def read_File_3(data, db_name):
                 # print(names)
                 # print(columns)
 
-        # connexion.close()
+        connexion.close()
         # output.close()
+
+        print(db_name + ".db a été initialisé avec succès.")
+
 
     except FileNotFoundError:
         print("Erreur Argument {}".format(data))
