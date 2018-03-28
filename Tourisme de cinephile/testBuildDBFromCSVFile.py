@@ -228,18 +228,21 @@ url1 = "http://opendata.paris.fr/explore/dataset/tournagesdefilmsparis2011/downl
 url2 = "http://opendata.paris.fr/explore/dataset/liste_des_sites_des_hotspots_paris_wifi/download?format=csv"
 url3 = "http://data.iledefrance.fr/explore/dataset/velib_a_paris_et_communes_limitrophes/download?format=csv"
 
-first1 = url1.find('dataset/')+len('dataset/')
-last1 = url1.find('/download')
+regExp_start = "dataset/"
+regExp_end = "/download"
+
+first1 = url1.find(regExp_start) + len(regExp_start)
+last1 = url1.find(regExp_end)
 db_name_1 = url1[first1:last1]
 #print(db_name_1)
 
-first2 = url2.find('dataset/')+len('dataset/')
-last2 = url2.find('/download')
+first2 = url2.find(regExp_start) + len(regExp_start)
+last2 = url2.find(regExp_end)
 db_name_2 = url2[first2:last2]
 #print(db_name_2)
 
-first3 = url3.find('dataset/')+len('dataset/')
-last3 = url3.find('/download')
+first3 = url3.find(regExp_start) + len(regExp_start)
+last3 = url3.find(regExp_end)
 db_name_3 = url3[first3:last3]
 #print(db_name_3)
 
