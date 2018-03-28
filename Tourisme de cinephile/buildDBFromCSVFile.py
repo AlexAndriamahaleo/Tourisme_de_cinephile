@@ -7,6 +7,32 @@ import sqlite3
 import codecs
 import re
 
+# Print iterations progress
+import sys
+
+
+# https://gist.github.com/aubricus/f91fb55dc6ba5557fbab06119420dd6a
+def print_progress(iteration, total, prefix='', suffix='', decimals=1, bar_length=100):
+    """
+    Call in a loop to create terminal progress bar
+    @params:
+        iteration   - Required  : current iteration (Int)
+        total       - Required  : total iterations (Int)
+        prefix      - Optional  : prefix string (Str)
+        suffix      - Optional  : suffix string (Str)
+        decimals    - Optional  : positive number of decimals in percent complete (Int)
+        bar_length  - Optional  : character length of bar (Int)
+    """
+    str_format = "{0:." + str(decimals) + "f}"
+    percents = str_format.format(100 * (iteration / float(total)))
+    filled_length = int(round(bar_length * iteration / float(total)))
+    bar = '█' * filled_length + '-' * (bar_length - filled_length)
+
+    sys.stdout.write('\r%s |%s| %s%s %s' % (prefix, bar, percents, '%', suffix)),
+
+    if iteration == total:
+        sys.stdout.write('\n')
+    sys.stdout.flush()
 
 def read_File(fileName):  # file format is for exemple: txt, csv, ...
     lignes = ""
@@ -99,9 +125,12 @@ def read_File_2(filename):
         print("Fichier {} introuvable".format(filename))
 
 
-def read_File_3(data, db_name):
+def read_File_3(data, db_name, stream):
     try:
         reader = data
+
+        row_stream = csv.reader(codecs.iterdecode(stream, 'utf-8'), delimiter=";")
+        row_count = sum(1 for row in row_stream)
 
         database = []
         columns = ""
@@ -110,12 +139,18 @@ def read_File_3(data, db_name):
 
         tableName = db_name
 
-        print("création de la base " + db_name + ".db en cours...")
+        #print("création de la base " + db_name + ".db en cours...")
 
         connexion = sqlite3.connect(db_name + ".db")
         curseur = connexion.cursor()
 
+        #print(row_count)
+
         for i, line in enumerate(reader):
+
+            # print_progress(i,317) # FONCTIONNE SEUELEMENT AVEC liste_des_sites_des_hotspots_paris_wifi.db CAR NOMBRE DE LIGNE = 317
+            print_progress(i, row_count, "Chargement et Initialisation de " + db_name + ".db", "Complété")
+
             if i:
                 # récupère les rows du fichier CSV
                 # -> données de ma base
@@ -138,7 +173,7 @@ def read_File_3(data, db_name):
 
                 # print(tableName, rows, rows_value)
 
-                curseur.execute("INSERT INTO %s (%s) VALUES (%s)" % (tableName, rows, rows_value))
+                curseur.execute("REPLACE INTO %s (%s) VALUES (%s)" % (tableName, rows, rows_value))
                 connexion.commit()
 
                 # print("cours fdp")
@@ -177,7 +212,7 @@ def read_File_3(data, db_name):
         connexion.close()
         # output.close()
 
-        print(db_name + ".db a été initialisé avec succès.")
+        print("\n" + db_name + ".db [TERMINATED]")
 
 
     except FileNotFoundError:
@@ -231,8 +266,12 @@ db_name_3 = url3[first3:last3]
 
 
 dataStream1 = urllib.request.urlopen(url1)
+dataStream1_c = urllib.request.urlopen(url1)
 dataStream2 = urllib.request.urlopen(url2)
+dataStream2_c = urllib.request.urlopen(url2)
 dataStream3 = urllib.request.urlopen(url3)
+dataStream3_c = urllib.request.urlopen(url3)
+
 
 assert isinstance(dataStream1, object)
 sourceFile1 = csv.reader(codecs.iterdecode(dataStream1, 'utf-8'), delimiter=";")
@@ -240,6 +279,7 @@ assert isinstance(dataStream2, object)
 sourceFile2 = csv.reader(codecs.iterdecode(dataStream2, 'utf-8'), delimiter=";")
 assert isinstance(dataStream3, object)
 sourceFile3 = csv.reader(codecs.iterdecode(dataStream3, 'utf-8'), delimiter=";")
+
 
 '''
 for line in sourceFile1:
@@ -251,9 +291,9 @@ for line in sourceFile2:
 
 '''
 
-read_File_3(sourceFile1, db_name_1)
-read_File_3(sourceFile2, db_name_2)
-read_File_3(sourceFile3, db_name_3)
+read_File_3(sourceFile1, db_name_1, dataStream1_c)
+read_File_3(sourceFile2, db_name_2, dataStream2_c)
+read_File_3(sourceFile3, db_name_3, dataStream3_c)
 
 '''
 FileData = read_page_url()
