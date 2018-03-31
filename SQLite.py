@@ -50,10 +50,10 @@ resultat = list(curseur)
 print(resultat)
 
 # Effacer le contenu de Table
-curseur.execute("DELETE FROM celebrites")
+#curseur.execute("DELETE FROM celebrites")
 
 # Effacer le Table
-curseur.execute("DROP TABLE celebrites")
+#curseur.execute("DROP TABLE celebrites")
 
 # fermer la base de données
 connexion.close()

@@ -88,10 +88,10 @@ myResult = select_specific_data(myCurseur, qui)
 print(myResult)
 
 # Effacer le contenu de Table par fonction
-delete_data(myCurseur, "celebrites")
+#delete_data(myCurseur, "celebrites")
 
 # Effacer le Table par fonction
-drop_table(myCurseur, "celebrites")
+#drop_table(myCurseur, "celebrites")
 
 # fermer la base de données
 myConnexion.close()
