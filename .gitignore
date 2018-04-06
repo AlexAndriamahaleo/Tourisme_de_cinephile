@@ -120,3 +120,4 @@ venv.bak/
 Tourisme de cinephile/*.db
 Tourisme de cinephile/*.db-journal
 *.txt
+!/requirements.txt
