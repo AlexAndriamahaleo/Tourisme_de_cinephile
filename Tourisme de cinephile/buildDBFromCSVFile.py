@@ -6,11 +6,17 @@ import csv
 import sqlite3
 import codecs
 import re
+import time
+import sys
+import itertools
+
+from pprint import pprint
+
+# Debut du decompte du temps
+start_time = time.time()
+
 
 # Print iterations progress
-import sys
-
-
 # https://gist.github.com/aubricus/f91fb55dc6ba5557fbab06119420dd6a
 def print_progress(iteration, total, prefix='', suffix='', decimals=1, bar_length=100):
     """
@@ -125,11 +131,12 @@ def read_File_2(filename):
         print("Fichier {} introuvable".format(filename))
 
 
-def read_File_3(data, db_name, stream):
+def read_File_3(db_name, stream):
     try:
-        reader = data
+        data, countRows = itertools.tee(codecs.iterdecode(stream, 'utf-8'))
 
-        row_stream = csv.reader(codecs.iterdecode(stream, 'utf-8'), delimiter=";")
+        reader = csv.reader(data, delimiter=";", quoting=csv.QUOTE_ALL)
+        row_stream = csv.reader(countRows, delimiter=";")
         row_count = sum(1 for row in row_stream)
 
         database = []
@@ -145,6 +152,7 @@ def read_File_3(data, db_name, stream):
         curseur = connexion.cursor()
 
         #print(row_count)
+
 
         for i, line in enumerate(reader):
 
@@ -266,19 +274,8 @@ db_name_3 = url3[first3:last3]
 
 
 dataStream1 = urllib.request.urlopen(url1)
-dataStream1_c = urllib.request.urlopen(url1)
 dataStream2 = urllib.request.urlopen(url2)
-dataStream2_c = urllib.request.urlopen(url2)
 dataStream3 = urllib.request.urlopen(url3)
-dataStream3_c = urllib.request.urlopen(url3)
-
-
-assert isinstance(dataStream1, object)
-sourceFile1 = csv.reader(codecs.iterdecode(dataStream1, 'utf-8'), delimiter=";")
-assert isinstance(dataStream2, object)
-sourceFile2 = csv.reader(codecs.iterdecode(dataStream2, 'utf-8'), delimiter=";")
-assert isinstance(dataStream3, object)
-sourceFile3 = csv.reader(codecs.iterdecode(dataStream3, 'utf-8'), delimiter=";")
 
 
 '''
@@ -291,9 +288,9 @@ for line in sourceFile2:
 
 '''
 
-read_File_3(sourceFile1, db_name_1, dataStream1_c)
-read_File_3(sourceFile2, db_name_2, dataStream2_c)
-read_File_3(sourceFile3, db_name_3, dataStream3_c)
+read_File_3(db_name_1, dataStream1)
+read_File_3(db_name_2, dataStream2)
+read_File_3(db_name_3, dataStream3)
 
 '''
 FileData = read_page_url()
@@ -301,3 +298,6 @@ FileData2 = read_page_url()
 print (FileData)
 print (FileData2)
 '''
+
+# Affichage du temps d execution
+print("Temps d'éxecution : %s secondes ---" % (time.time() - start_time))
