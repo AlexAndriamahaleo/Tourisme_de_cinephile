@@ -9,8 +9,8 @@ import re
 import time
 import sys
 import itertools
+from xml.etree.ElementTree import *
 
-from pprint import pprint
 
 # Debut du decompte du temps
 start_time = time.time()
@@ -131,28 +131,56 @@ def read_File_2(filename):
         print("Fichier {} introuvable".format(filename))
 
 
+def list_columns(xml_file):
+    """ Renvoie la liste des attributs de chaque élément """
+    tree = parse(xml_file)
+    root = tree.getroot()
+
+    liste = []
+    for child in root:
+        liste.append(child.attrib)  # parmis les attributs on a l'id (num de la colonne) le type et le nom de la colonne
+
+    return liste
+
 def read_File_3(db_name, stream):
     try:
         data, countRows = itertools.tee(codecs.iterdecode(stream, 'utf-8'))
 
-        reader = csv.reader(data, delimiter=";", quoting=csv.QUOTE_ALL)
+        reader = csv.reader(data, delimiter=";")
         row_stream = csv.reader(countRows, delimiter=";")
         row_count = sum(1 for row in row_stream)
 
         database = []
-        columns = ""
 
         rows_value = ""
 
         tableName = db_name
 
-        #print("création de la base " + db_name + ".db en cours...")
+        # print("création de la base " + db_name + ".db en cours...")
 
         connexion = sqlite3.connect(db_name + ".db")
         curseur = connexion.cursor()
 
-        #print(row_count)
+        xmlParser = list_columns(db_name + ".xml")
+        sqlCreateOut = ""
+        sqlInsertOut = ""
 
+        for attr in xmlParser:
+            if int(attr['id']) != (len(xmlParser) - 1):
+                sqlCreateOut += attr['name'] + " " + attr['type'].upper() + ", "
+                sqlInsertOut += attr['name'] + ", "
+            else:
+                sqlCreateOut += attr['name'] + " " + attr['type'].upper()
+                sqlInsertOut += attr['name']
+            # print(attr['id'] + ' : ' + attr['name'] + ' ' + attr['type'].upper())
+
+        # print(sqlCreateOut)
+        # print(sqlInsertOut)
+        curseur.execute("DROP TABLE IF EXISTS %s" % tableName)
+        connexion.commit()
+
+        curseur.execute("CREATE TABLE IF NOT EXISTS %s (%s)" % (tableName, sqlCreateOut))
+        connexion.commit()
 
         for i, line in enumerate(reader):
 
@@ -173,7 +201,14 @@ def read_File_3(db_name, stream):
                         # raise ValueError
                         rows_value += '"' + re.sub('["{}]', '', line[l]) + '"'
                     else:
-                        rows_value += '"' + line[l] + '"'
+
+                        try:
+                            # print(int(line[l]))
+                            rows_value += str(int(line[l]))
+                        except ValueError:
+                            rows_value += '"' + line[l] + '"'
+
+                        # rows_value += '"' + line[l] + '"'
 
                     if l != (len(line) - 1):
                         rows_value += ", "
@@ -181,7 +216,8 @@ def read_File_3(db_name, stream):
 
                 # print(tableName, rows, rows_value)
 
-                curseur.execute("REPLACE INTO %s (%s) VALUES (%s)" % (tableName, rows, rows_value))
+                # print("REPLACE INTO %s (%s) VALUES (%s)" % (tableName, sqlInsertOut, rows_value))
+                curseur.execute("REPLACE INTO %s (%s) VALUES (%s)" % (tableName, sqlInsertOut, rows_value))
                 connexion.commit()
 
                 # print("cours fdp")
@@ -196,6 +232,7 @@ def read_File_3(db_name, stream):
                 rows_value = ""
 
                 database.append(line)
+            """
             else:
                 # récupère les columns du fichier CSV
                 # -> colonne de ma base
@@ -208,7 +245,7 @@ def read_File_3(db_name, stream):
                     if j != (len(line) - 1):
                         columns += ", "
                 # output.write(columns)
-                curseur.execute("CREATE TABLE IF NOT EXISTS %s (%s)" % (tableName, columns))
+                # curseur.execute("CREATE TABLE IF NOT EXISTS %s (%s)" % (tableName, columns))
 
                 # c_name = curseur.execute("SELECT * FROM %s" % tableName)
                 # names = list(map(lambda x: x[0], c_name.description))
@@ -216,6 +253,7 @@ def read_File_3(db_name, stream):
                 # print(rows)
                 # print(names)
                 # print(columns)
+            """
 
         connexion.close()
         # output.close()
@@ -300,4 +338,7 @@ print (FileData2)
 '''
 
 # Affichage du temps d execution
-print("Temps d'éxecution : %s secondes ---" % (time.time() - start_time))
+end_time = time.time()
+hours, rem = divmod(end_time - start_time, 3600)
+minutes, seconds = divmod(rem, 60)
+print("Temps d'éxecution : {:0>2} H:{:0>2} M:{:05.2f} S".format(int(hours), int(minutes), seconds))

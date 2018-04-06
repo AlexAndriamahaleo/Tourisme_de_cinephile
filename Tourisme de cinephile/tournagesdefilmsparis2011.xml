@@ -4,8 +4,9 @@
     <colonne id="1" type="varchar(30)" name="realisateur"/>
     <colonne id="2" type="varchar(50)" name="adresse"/>
     <colonne id="3" type="varchar(20)" name="organisme_demandeur"/>
-    <colonne id="4" type="int"         name="ardt"/>
-    <colonne id="5" type="timestamp"   name="date_debut"/>
-    <colonne id="6" type="timestamp"   name="date_fin"/>
-    <colonne id="7" type="varchar(30)" name="xy"/>
+    <colonne id="4" type="varchar(20)" name="type_de_tournage"/>
+    <colonne id="5" type="int" name="ardt"/>
+    <colonne id="6" type="timestamp" name="date_debut"/>
+    <colonne id="7" type="timestamp" name="date_fin"/>
+    <colonne id="8" type="varchar(30)" name="xy"/>
 </colonnes>
