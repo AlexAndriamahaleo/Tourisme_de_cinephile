@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<colonnes>
+    <colonne id="0" type="int"         name="number"/>
+    <colonne id="1" type="varchar(50)" name="name"/>
+    <colonne id="2" type="varchar(50)" name="adresse"/>
+    <colonne id="3" type="int(2)"      name="dept"/>
+    <colonne id="4" type="int(5)"      name="cp"/>
+    <colonne id="5" type="varchar(20)" name="ville"/>
+    <colonne id="6" type="float"       name="lattitude"/>
+    <colonne id="7" type="float"       name="longitude"/>
+    <colonne id="8" type="varchar(30)" name="wgs84"/>
+</colonnes>

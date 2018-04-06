@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<colonnes>
+    <colonne id="0" type="int"         name="objectid"/>
+    <colonne id="1" type="varchar(50)" name="nom_site"/>
+    <colonne id="2" type="varchar(50)" name="adresse"/>
+    <colonne id="3" type="varchar(20)" name="code_site"/>
+    <colonne id="4" type="int"         name="arrondissement"/>
+    <colonne id="5" type="varchar(50)" name="geo_shape"/>
+    <colonne id="6" type="varchar(30)" name="geo_point_2d"/>
+</colonnes>
