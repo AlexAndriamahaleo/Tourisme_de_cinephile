@@ -4,6 +4,8 @@
 import sqlite3
 
 
+# TODO// create views
+
 # Connection à la base de donnée
 def connect_database(databaseName_and_path):
     connexion = sqlite3.connect(databaseName_and_path)
