@@ -119,3 +119,4 @@ venv.bak/
 .idea/*
 Tourisme de cinephile/*.db
 Tourisme de cinephile/*.db-journal
+*.txt
