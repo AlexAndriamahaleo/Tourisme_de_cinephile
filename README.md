@@ -1,13 +1,14 @@
-# I.S.I. Projet
+# I.S.I. Projet - Tourisme et cinéphile
 
-## Tourisme et cinéphile
+Version: Python3.X
 
-version: Python3.X
+Check your version : `python --version` 
 
-`python --version` 
+Otherwise use `python3` to launch script.
 
-If not Python3 use `python3` to launch script.
+Requirements: 
 
-requirements: wxPython
-
+wxPython : 
 `sudo pip install -r requirements.txt`
+
+PyQt 4

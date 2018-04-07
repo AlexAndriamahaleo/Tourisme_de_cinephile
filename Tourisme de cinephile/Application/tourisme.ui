@@ -1,0 +1,376 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+    <class>MainWindow</class>
+    <widget class="QMainWindow" name="MainWindow">
+        <property name="geometry">
+            <rect>
+                <x>0</x>
+                <y>0</y>
+                <width>800</width>
+                <height>600</height>
+            </rect>
+        </property>
+        <property name="windowTitle">
+            <string>Movies'n'Go</string>
+        </property>
+        <widget class="QWidget" name="centralwidget">
+            <widget class="QWidget" name="widget" native="true">
+                <property name="visible">
+                    <bool>false</bool>
+                </property>
+                <property name="enabled">
+                    <bool>true</bool>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>10</x>
+                        <y>10</y>
+                        <width>761</width>
+                        <height>221</height>
+                    </rect>
+                </property>
+                <widget class="Line" name="line_2">
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>120</y>
+                            <width>21</width>
+                            <height>51</height>
+                        </rect>
+                    </property>
+                    <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                    </property>
+                </widget>
+                <widget class="QSpinBox" name="spinBox">
+                    <property name="geometry">
+                        <rect>
+                            <x>440</x>
+                            <y>130</y>
+                            <width>131</width>
+                            <height>31</height>
+                        </rect>
+                    </property>
+                    <property name="minimum">
+                        <number>75001</number>
+                    </property>
+                    <property name="maximum">
+                        <number>75099</number>
+                    </property>
+                </widget>
+                <widget class="QCheckBox" name="checkBox_3">
+                    <property name="geometry">
+                        <rect>
+                            <x>220</x>
+                            <y>130</y>
+                            <width>111</width>
+                            <height>31</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>Velib</string>
+                    </property>
+                </widget>
+                <widget class="QPushButton" name="pushButton">
+                    <property name="geometry">
+                        <rect>
+                            <x>630</x>
+                            <y>130</y>
+                            <width>111</width>
+                            <height>31</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>GO !!</string>
+                    </property>
+                </widget>
+                <widget class="QCheckBox" name="checkBox_2">
+                    <property name="geometry">
+                        <rect>
+                            <x>30</x>
+                            <y>130</y>
+                            <width>151</width>
+                            <height>31</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>Lieux de tournages</string>
+                    </property>
+                </widget>
+                <widget class="QCheckBox" name="checkBox">
+                    <property name="geometry">
+                        <rect>
+                            <x>340</x>
+                            <y>130</y>
+                            <width>111</width>
+                            <height>31</height>
+                        </rect>
+                    </property>
+                    <property name="text">
+                        <string>Wi-Fi</string>
+                    </property>
+                </widget>
+                <widget class="QLabel" name="label_3">
+                    <property name="geometry">
+                        <rect>
+                            <x>220</x>
+                            <y>10</y>
+                            <width>311</width>
+                            <height>91</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <pointsize>33</pointsize>
+                            <weight>75</weight>
+                            <italic>true</italic>
+                            <bold>true</bold>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Movies'n'Go</string>
+                    </property>
+                    <property name="alignment">
+                        <set>Qt::AlignCenter</set>
+                    </property>
+                </widget>
+                <zorder>line_2</zorder>
+                <zorder>spinBox</zorder>
+                <zorder>checkBox_3</zorder>
+                <zorder>pushButton</zorder>
+                <zorder>checkBox_2</zorder>
+                <zorder>checkBox</zorder>
+                <zorder>label_3</zorder>
+                <zorder>label_3</zorder>
+            </widget>
+            <widget class="QWidget" name="widget_2" native="true">
+                <property name="enabled">
+                    <bool>true</bool>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>0</x>
+                        <y>180</y>
+                        <width>801</width>
+                        <height>101</height>
+                    </rect>
+                </property>
+                <property name="font">
+                    <font>
+                        <pointsize>15</pointsize>
+                    </font>
+                </property>
+                <property name="autoFillBackground">
+                    <bool>false</bool>
+                </property>
+                <widget class="QLabel" name="label_2">
+                    <property name="geometry">
+                        <rect>
+                            <x>350</x>
+                            <y>-10</y>
+                            <width>461</width>
+                            <height>121</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <family>Junicode</family>
+                            <pointsize>19</pointsize>
+                            <weight>50</weight>
+                            <italic>true</italic>
+                            <bold>false</bold>
+                            <underline>false</underline>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Trouvez le lieu de tournage qui vous ressemble !</string>
+                    </property>
+                    <property name="textFormat">
+                        <enum>Qt::AutoText</enum>
+                    </property>
+                    <property name="scaledContents">
+                        <bool>false</bool>
+                    </property>
+                </widget>
+                <widget class="QLabel" name="label">
+                    <property name="geometry">
+                        <rect>
+                            <x>10</x>
+                            <y>0</y>
+                            <width>311</width>
+                            <height>91</height>
+                        </rect>
+                    </property>
+                    <property name="font">
+                        <font>
+                            <pointsize>33</pointsize>
+                            <weight>75</weight>
+                            <italic>true</italic>
+                            <bold>true</bold>
+                        </font>
+                    </property>
+                    <property name="text">
+                        <string>Movies'n'Go</string>
+                    </property>
+                    <property name="alignment">
+                        <set>Qt::AlignCenter</set>
+                    </property>
+                </widget>
+                <widget class="Line" name="line">
+                    <property name="geometry">
+                        <rect>
+                            <x>310</x>
+                            <y>-10</y>
+                            <width>16</width>
+                            <height>121</height>
+                        </rect>
+                    </property>
+                    <property name="orientation">
+                        <enum>Qt::Vertical</enum>
+                    </property>
+                </widget>
+                <zorder>label_2</zorder>
+                <zorder>label</zorder>
+                <zorder>line</zorder>
+                <zorder>widget</zorder>
+            </widget>
+        </widget>
+        <widget class="QMenuBar" name="menubar">
+            <property name="geometry">
+                <rect>
+                    <x>0</x>
+                    <y>0</y>
+                    <width>800</width>
+                    <height>27</height>
+                </rect>
+            </property>
+            <widget class="QMenu" name="menuQuitter">
+                <property name="title">
+                    <string>Options</string>
+                </property>
+                <addaction name="actionAccueil"/>
+                <addaction name="actionEffectuer_une_recherche"/>
+                <addaction name="separator"/>
+                <addaction name="actionQuitter"/>
+            </widget>
+            <widget class="QMenu" name="menuAide">
+                <property name="title">
+                    <string>Aide ?</string>
+                </property>
+                <addaction name="action_propos"/>
+                <addaction name="actionLicence"/>
+            </widget>
+            <addaction name="menuQuitter"/>
+            <addaction name="menuAide"/>
+        </widget>
+        <widget class="QStatusBar" name="statusbar"/>
+        <action name="actionQuitter">
+            <property name="text">
+                <string>Quitter</string>
+            </property>
+        </action>
+        <action name="action_propos">
+            <property name="text">
+                <string>À propos</string>
+            </property>
+        </action>
+        <action name="actionEffectuer_une_recherche">
+            <property name="text">
+                <string>Effectuer une recherche</string>
+            </property>
+        </action>
+        <action name="actionLicence">
+            <property name="text">
+                <string>Licence</string>
+            </property>
+        </action>
+        <action name="actionAccueil">
+            <property name="text">
+                <string>Accueil</string>
+            </property>
+        </action>
+    </widget>
+    <resources/>
+    <connections>
+        <connection>
+            <sender>actionQuitter</sender>
+            <signal>activated()</signal>
+            <receiver>MainWindow</receiver>
+            <slot>close()</slot>
+            <hints>
+                <hint type="sourcelabel">
+                    <x>-1</x>
+                    <y>-1</y>
+                </hint>
+                <hint type="destinationlabel">
+                    <x>399</x>
+                    <y>299</y>
+                </hint>
+            </hints>
+        </connection>
+        <connection>
+            <sender>actionEffectuer_une_recherche</sender>
+            <signal>activated()</signal>
+            <receiver>widget_2</receiver>
+            <slot>close()</slot>
+            <hints>
+                <hint type="sourcelabel">
+                    <x>-1</x>
+                    <y>-1</y>
+                </hint>
+                <hint type="destinationlabel">
+                    <x>395</x>
+                    <y>217</y>
+                </hint>
+            </hints>
+        </connection>
+        <connection>
+            <sender>actionAccueil</sender>
+            <signal>activated()</signal>
+            <receiver>widget_2</receiver>
+            <slot>show()</slot>
+            <hints>
+                <hint type="sourcelabel">
+                    <x>-1</x>
+                    <y>-1</y>
+                </hint>
+                <hint type="destinationlabel">
+                    <x>395</x>
+                    <y>217</y>
+                </hint>
+            </hints>
+        </connection>
+        <connection>
+            <sender>actionEffectuer_une_recherche</sender>
+            <signal>activated()</signal>
+            <receiver>widget</receiver>
+            <slot>show()</slot>
+            <hints>
+                <hint type="sourcelabel">
+                    <x>-1</x>
+                    <y>-1</y>
+                </hint>
+                <hint type="destinationlabel">
+                    <x>390</x>
+                    <y>517</y>
+                </hint>
+            </hints>
+        </connection>
+        <connection>
+            <sender>actionAccueil</sender>
+            <signal>activated()</signal>
+            <receiver>widget</receiver>
+            <slot>close()</slot>
+            <hints>
+                <hint type="sourcelabel">
+                    <x>-1</x>
+                    <y>-1</y>
+                </hint>
+                <hint type="destinationlabel">
+                    <x>390</x>
+                    <y>147</y>
+                </hint>
+            </hints>
+        </connection>
+    </connections>
+</ui>
