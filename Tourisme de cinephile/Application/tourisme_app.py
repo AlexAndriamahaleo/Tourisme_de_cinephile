@@ -16,25 +16,23 @@ except AttributeError:
 
 try:
     _encoding = QtGui.QApplication.UnicodeUTF8
-
-
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig, _encoding)
 except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
 
-
 class Ui_MainWindow(object):
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
-        MainWindow.resize(800, 600)
+        MainWindow.resize(1080, 720)
+        MainWindow.setMinimumSize(QtCore.QSize(1080, 720))
         self.centralwidget = QtGui.QWidget(MainWindow)
         self.centralwidget.setObjectName(_fromUtf8("centralwidget"))
         self.widget = QtGui.QWidget(self.centralwidget)
         self.widget.setVisible(False)
         self.widget.setEnabled(True)
-        self.widget.setGeometry(QtCore.QRect(10, 10, 761, 221))
+        self.widget.setGeometry(QtCore.QRect(160, 60, 761, 221))
         self.widget.setObjectName(_fromUtf8("widget"))
         self.line_2 = QtGui.QFrame(self.widget)
         self.line_2.setGeometry(QtCore.QRect(10, 120, 21, 51))
@@ -78,7 +76,7 @@ class Ui_MainWindow(object):
         self.label_3.raise_()
         self.widget_2 = QtGui.QWidget(self.centralwidget)
         self.widget_2.setEnabled(True)
-        self.widget_2.setGeometry(QtCore.QRect(0, 180, 801, 101))
+        self.widget_2.setGeometry(QtCore.QRect(150, 230, 801, 101))
         font = QtGui.QFont()
         font.setPointSize(15)
         self.widget_2.setFont(font)
@@ -118,7 +116,7 @@ class Ui_MainWindow(object):
         self.widget.raise_()
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
-        self.menubar.setGeometry(QtCore.QRect(0, 0, 800, 27))
+        self.menubar.setGeometry(QtCore.QRect(0, 0, 1080, 27))
         self.menubar.setObjectName(_fromUtf8("menubar"))
         self.menuQuitter = QtGui.QMenu(self.menubar)
         self.menuQuitter.setObjectName(_fromUtf8("menuQuitter"))
@@ -173,3 +171,4 @@ class Ui_MainWindow(object):
         self.actionEffectuer_une_recherche.setText(_translate("MainWindow", "Effectuer une recherche", None))
         self.actionLicence.setText(_translate("MainWindow", "Licence", None))
         self.actionAccueil.setText(_translate("MainWindow", "Accueil", None))
+

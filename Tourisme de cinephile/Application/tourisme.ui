@@ -6,9 +6,15 @@
             <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>800</width>
-                <height>600</height>
+                <width>1080</width>
+                <height>720</height>
             </rect>
+        </property>
+        <property name="minimumSize">
+            <size>
+                <width>1080</width>
+                <height>720</height>
+            </size>
         </property>
         <property name="windowTitle">
             <string>Movies'n'Go</string>
@@ -23,8 +29,8 @@
                 </property>
                 <property name="geometry">
                     <rect>
-                        <x>10</x>
-                        <y>10</y>
+                        <x>160</x>
+                        <y>60</y>
                         <width>761</width>
                         <height>221</height>
                     </rect>
@@ -149,8 +155,8 @@
                 </property>
                 <property name="geometry">
                     <rect>
-                        <x>0</x>
-                        <y>180</y>
+                        <x>150</x>
+                        <y>230</y>
                         <width>801</width>
                         <height>101</height>
                     </rect>
@@ -240,7 +246,7 @@
                 <rect>
                     <x>0</x>
                     <y>0</y>
-                    <width>800</width>
+                    <width>1080</width>
                     <height>27</height>
                 </rect>
             </property>
