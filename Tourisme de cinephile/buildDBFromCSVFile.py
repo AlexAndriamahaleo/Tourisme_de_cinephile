@@ -10,7 +10,6 @@ import time
 import sys
 import itertools
 from xml.etree.ElementTree import *
-import wx
 
 
 # Print iterations progress
