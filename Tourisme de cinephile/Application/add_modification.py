@@ -66,8 +66,9 @@ self.results.setVisible(False)
 #
 #
 MainWindow.i_search.clicked.connect(lambda: self.app_page.setCurrentIndex(1))
-MainWindow.actionEffectuer_une_recherche.activated.connect(lambda: self.app_page.setCurrentIndex(1))
+self.actionEffectuer_une_recherche.activated.connect(lambda: self.app_page.setCurrentIndex(1))
 # MainWindow.s_go.clicked.connect(lambda: self.app_page.setCurrentIndex(0))
 MainWindow.s_go.clicked.connect(lambda: self.loadData())
-MainWindow.actionAccueil.activated.connect(lambda: self.app_page.setCurrentIndex(0))
+self.actionAccueil.activated.connect(lambda: self.app_page.setCurrentIndex(0))
+self.actionMettre_jour_la_base_de_donn_e.activated.connect(lambda: self.app_page.setCurrentIndex(2))
 #

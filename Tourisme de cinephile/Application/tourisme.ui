@@ -51,7 +51,7 @@
                         </rect>
                     </property>
                     <property name="currentIndex">
-                        <number>1</number>
+                        <number>0</number>
                     </property>
                     <widget class="QWidget" name="introduction">
                         <widget class="QLabel" name="i_title">
@@ -402,6 +402,27 @@
                         <zorder>film_all</zorder>
                         <zorder>results</zorder>
                     </widget>
+                    <widget class="QWidget" name="update_sources">
+                        <widget class="QProgressBar" name="progressBar">
+                            <property name="geometry">
+                                <rect>
+                                    <x>140</x>
+                                    <y>250</y>
+                                    <width>771</width>
+                                    <height>71</height>
+                                </rect>
+                            </property>
+                            <property name="value">
+                                <number>0</number>
+                            </property>
+                            <property name="orientation">
+                                <enum>Qt::Horizontal</enum>
+                            </property>
+                            <property name="textDirection">
+                                <enum>QProgressBar::TopToBottom</enum>
+                            </property>
+                        </widget>
+                    </widget>
                 </widget>
             </widget>
         </widget>
@@ -429,6 +450,8 @@
                 </property>
                 <addaction name="action_propos"/>
                 <addaction name="actionLicence"/>
+                <addaction name="separator"/>
+                <addaction name="actionMettre_jour_la_base_de_donn_e"/>
             </widget>
             <addaction name="menuQuitter"/>
             <addaction name="menuAide"/>
@@ -457,6 +480,11 @@
         <action name="actionAccueil">
             <property name="text">
                 <string>Accueil</string>
+            </property>
+        </action>
+        <action name="actionMettre_jour_la_base_de_donn_e">
+            <property name="text">
+                <string>Mettre à jour la base de donnée</string>
             </property>
         </action>
     </widget>
