@@ -20,236 +20,371 @@
             <string>Movies'n'Go</string>
         </property>
         <widget class="QWidget" name="centralwidget">
-            <widget class="QWidget" name="search" native="true">
-                <property name="enabled">
-                    <bool>true</bool>
-                </property>
+            <property name="styleSheet">
+                <string notr="true"/>
+            </property>
+            <widget class="QFrame" name="frame">
                 <property name="geometry">
                     <rect>
-                        <x>160</x>
-                        <y>60</y>
-                        <width>761</width>
-                        <height>221</height>
+                        <x>40</x>
+                        <y>20</y>
+                        <width>1021</width>
+                        <height>631</height>
                     </rect>
                 </property>
-                <widget class="Line" name="line_2">
+                <property name="frameShape">
+                    <enum>QFrame::StyledPanel</enum>
+                </property>
+                <property name="frameShadow">
+                    <enum>QFrame::Raised</enum>
+                </property>
+                <widget class="QStackedWidget" name="app_page">
+                    <property name="enabled">
+                        <bool>true</bool>
+                    </property>
                     <property name="geometry">
                         <rect>
                             <x>10</x>
-                            <y>120</y>
-                            <width>21</width>
-                            <height>51</height>
-                        </rect>
-                    </property>
-                    <property name="orientation">
-                        <enum>Qt::Vertical</enum>
-                    </property>
-                </widget>
-                <widget class="QSpinBox" name="s_arrdt">
-                    <property name="geometry">
-                        <rect>
-                            <x>440</x>
-                            <y>130</y>
-                            <width>131</width>
-                            <height>31</height>
-                        </rect>
-                    </property>
-                    <property name="minimum">
-                        <number>75001</number>
-                    </property>
-                    <property name="maximum">
-                        <number>75099</number>
-                    </property>
-                </widget>
-                <widget class="QCheckBox" name="box_velib">
-                    <property name="geometry">
-                        <rect>
-                            <x>220</x>
-                            <y>130</y>
-                            <width>111</width>
-                            <height>31</height>
-                        </rect>
-                    </property>
-                    <property name="text">
-                        <string>Velib</string>
-                    </property>
-                </widget>
-                <widget class="QPushButton" name="s_go">
-                    <property name="geometry">
-                        <rect>
-                            <x>630</x>
-                            <y>130</y>
-                            <width>111</width>
-                            <height>31</height>
-                        </rect>
-                    </property>
-                    <property name="text">
-                        <string>GO !!</string>
-                    </property>
-                </widget>
-                <widget class="QCheckBox" name="box_tournages">
-                    <property name="geometry">
-                        <rect>
-                            <x>30</x>
-                            <y>130</y>
-                            <width>151</width>
-                            <height>31</height>
-                        </rect>
-                    </property>
-                    <property name="text">
-                        <string>Lieux de tournages</string>
-                    </property>
-                </widget>
-                <widget class="QCheckBox" name="box_wifi">
-                    <property name="geometry">
-                        <rect>
-                            <x>340</x>
-                            <y>130</y>
-                            <width>111</width>
-                            <height>31</height>
-                        </rect>
-                    </property>
-                    <property name="text">
-                        <string>Wi-Fi</string>
-                    </property>
-                </widget>
-                <widget class="QLabel" name="s_title">
-                    <property name="geometry">
-                        <rect>
-                            <x>220</x>
                             <y>10</y>
-                            <width>311</width>
-                            <height>91</height>
+                            <width>1001</width>
+                            <height>601</height>
                         </rect>
                     </property>
-                    <property name="font">
-                        <font>
-                            <pointsize>33</pointsize>
-                            <weight>75</weight>
-                            <italic>true</italic>
-                            <bold>true</bold>
-                        </font>
+                    <property name="currentIndex">
+                        <number>0</number>
                     </property>
-                    <property name="text">
-                        <string>Movies'n'Go</string>
-                    </property>
-                    <property name="alignment">
-                        <set>Qt::AlignCenter</set>
-                    </property>
+                    <widget class="QWidget" name="introduction">
+                        <widget class="QLabel" name="i_title">
+                            <property name="geometry">
+                                <rect>
+                                    <x>150</x>
+                                    <y>230</y>
+                                    <width>311</width>
+                                    <height>91</height>
+                                </rect>
+                            </property>
+                            <property name="font">
+                                <font>
+                                    <pointsize>33</pointsize>
+                                    <weight>75</weight>
+                                    <italic>true</italic>
+                                    <bold>true</bold>
+                                </font>
+                            </property>
+                            <property name="text">
+                                <string>Movies'n'Go</string>
+                            </property>
+                            <property name="alignment">
+                                <set>Qt::AlignCenter</set>
+                            </property>
+                        </widget>
+                        <widget class="QLabel" name="i_slogan">
+                            <property name="geometry">
+                                <rect>
+                                    <x>490</x>
+                                    <y>220</y>
+                                    <width>461</width>
+                                    <height>121</height>
+                                </rect>
+                            </property>
+                            <property name="font">
+                                <font>
+                                    <family>Junicode</family>
+                                    <pointsize>19</pointsize>
+                                    <weight>50</weight>
+                                    <italic>true</italic>
+                                    <bold>false</bold>
+                                    <underline>false</underline>
+                                </font>
+                            </property>
+                            <property name="mouseTracking">
+                                <bool>false</bool>
+                            </property>
+                            <property name="autoFillBackground">
+                                <bool>true</bool>
+                            </property>
+                            <property name="text">
+                                <string>Trouvez le lieu de tournage qui vous ressemble !</string>
+                            </property>
+                            <property name="textFormat">
+                                <enum>Qt::AutoText</enum>
+                            </property>
+                            <property name="scaledContents">
+                                <bool>false</bool>
+                            </property>
+                        </widget>
+                        <widget class="Line" name="i_separator">
+                            <property name="geometry">
+                                <rect>
+                                    <x>470</x>
+                                    <y>210</y>
+                                    <width>16</width>
+                                    <height>141</height>
+                                </rect>
+                            </property>
+                            <property name="orientation">
+                                <enum>Qt::Vertical</enum>
+                            </property>
+                        </widget>
+                        <widget class="QPushButton" name="i_search">
+                            <property name="geometry">
+                                <rect>
+                                    <x>460</x>
+                                    <y>390</y>
+                                    <width>141</width>
+                                    <height>31</height>
+                                </rect>
+                            </property>
+                            <property name="text">
+                                <string>Chercher</string>
+                            </property>
+                        </widget>
+                    </widget>
+                    <widget class="QWidget" name="research">
+                        <widget class="QLabel" name="s_title">
+                            <property name="geometry">
+                                <rect>
+                                    <x>350</x>
+                                    <y>-20</y>
+                                    <width>311</width>
+                                    <height>91</height>
+                                </rect>
+                            </property>
+                            <property name="font">
+                                <font>
+                                    <pointsize>33</pointsize>
+                                    <weight>75</weight>
+                                    <italic>true</italic>
+                                    <bold>true</bold>
+                                </font>
+                            </property>
+                            <property name="text">
+                                <string>Movies'n'Go</string>
+                            </property>
+                            <property name="alignment">
+                                <set>Qt::AlignCenter</set>
+                            </property>
+                        </widget>
+                        <widget class="QSpinBox" name="s_arrdt">
+                            <property name="geometry">
+                                <rect>
+                                    <x>570</x>
+                                    <y>60</y>
+                                    <width>131</width>
+                                    <height>31</height>
+                                </rect>
+                            </property>
+                            <property name="minimum">
+                                <number>75001</number>
+                            </property>
+                            <property name="maximum">
+                                <number>75099</number>
+                            </property>
+                        </widget>
+                        <widget class="QCheckBox" name="box_velib">
+                            <property name="geometry">
+                                <rect>
+                                    <x>320</x>
+                                    <y>60</y>
+                                    <width>111</width>
+                                    <height>31</height>
+                                </rect>
+                            </property>
+                            <property name="text">
+                                <string>Velib</string>
+                            </property>
+                        </widget>
+                        <widget class="QPushButton" name="s_go">
+                            <property name="geometry">
+                                <rect>
+                                    <x>760</x>
+                                    <y>60</y>
+                                    <width>111</width>
+                                    <height>31</height>
+                                </rect>
+                            </property>
+                            <property name="text">
+                                <string>GO !!</string>
+                            </property>
+                        </widget>
+                        <widget class="Line" name="line_2">
+                            <property name="geometry">
+                                <rect>
+                                    <x>140</x>
+                                    <y>50</y>
+                                    <width>21</width>
+                                    <height>51</height>
+                                </rect>
+                            </property>
+                            <property name="orientation">
+                                <enum>Qt::Vertical</enum>
+                            </property>
+                        </widget>
+                        <widget class="QCheckBox" name="box_films">
+                            <property name="geometry">
+                                <rect>
+                                    <x>160</x>
+                                    <y>60</y>
+                                    <width>151</width>
+                                    <height>31</height>
+                                </rect>
+                            </property>
+                            <property name="text">
+                                <string>Tournages de films</string>
+                            </property>
+                            <property name="checked">
+                                <bool>false</bool>
+                            </property>
+                        </widget>
+                        <widget class="QCheckBox" name="box_wifi">
+                            <property name="geometry">
+                                <rect>
+                                    <x>440</x>
+                                    <y>60</y>
+                                    <width>111</width>
+                                    <height>31</height>
+                                </rect>
+                            </property>
+                            <property name="text">
+                                <string>Wi-Fi</string>
+                            </property>
+                        </widget>
+                        <widget class="QGroupBox" name="film_all">
+                            <property name="geometry">
+                                <rect>
+                                    <x>150</x>
+                                    <y>110</y>
+                                    <width>561</width>
+                                    <height>111</height>
+                                </rect>
+                            </property>
+                            <property name="title">
+                                <string>Dites nous tout !</string>
+                            </property>
+                            <widget class="QLabel" name="type">
+                                <property name="geometry">
+                                    <rect>
+                                        <x>380</x>
+                                        <y>30</y>
+                                        <width>56</width>
+                                        <height>17</height>
+                                    </rect>
+                                </property>
+                                <property name="text">
+                                    <string>Type</string>
+                                </property>
+                            </widget>
+                            <widget class="QLabel" name="titre">
+                                <property name="geometry">
+                                    <rect>
+                                        <x>0</x>
+                                        <y>30</y>
+                                        <width>56</width>
+                                        <height>17</height>
+                                    </rect>
+                                </property>
+                                <property name="text">
+                                    <string>Titre</string>
+                                </property>
+                            </widget>
+                            <widget class="QLineEdit" name="titre_input">
+                                <property name="geometry">
+                                    <rect>
+                                        <x>0</x>
+                                        <y>50</y>
+                                        <width>181</width>
+                                        <height>31</height>
+                                    </rect>
+                                </property>
+                            </widget>
+                            <widget class="QLabel" name="realisateur">
+                                <property name="geometry">
+                                    <rect>
+                                        <x>190</x>
+                                        <y>30</y>
+                                        <width>91</width>
+                                        <height>17</height>
+                                    </rect>
+                                </property>
+                                <property name="text">
+                                    <string>Réalisateur</string>
+                                </property>
+                            </widget>
+                            <widget class="QLineEdit" name="realisateur_input">
+                                <property name="geometry">
+                                    <rect>
+                                        <x>190</x>
+                                        <y>50</y>
+                                        <width>181</width>
+                                        <height>31</height>
+                                    </rect>
+                                </property>
+                            </widget>
+                            <widget class="QComboBox" name="type_choice">
+                                <property name="geometry">
+                                    <rect>
+                                        <x>380</x>
+                                        <y>50</y>
+                                        <width>171</width>
+                                        <height>31</height>
+                                    </rect>
+                                </property>
+                            </widget>
+                        </widget>
+                        <widget class="QFrame" name="results">
+                            <property name="geometry">
+                                <rect>
+                                    <x>10</x>
+                                    <y>190</y>
+                                    <width>991</width>
+                                    <height>421</height>
+                                </rect>
+                            </property>
+                            <property name="frameShape">
+                                <enum>QFrame::StyledPanel</enum>
+                            </property>
+                            <property name="frameShadow">
+                                <enum>QFrame::Raised</enum>
+                            </property>
+                            <widget class="QTableWidget" name="tableWidget">
+                                <property name="geometry">
+                                    <rect>
+                                        <x>10</x>
+                                        <y>10</y>
+                                        <width>971</width>
+                                        <height>401</height>
+                                    </rect>
+                                </property>
+                                <property name="rowCount">
+                                    <number>0</number>
+                                </property>
+                                <property name="columnCount">
+                                    <number>8</number>
+                                </property>
+                                <column/>
+                                <column/>
+                                <column/>
+                                <column/>
+                                <column/>
+                                <column/>
+                                <column/>
+                                <column/>
+                            </widget>
+                        </widget>
+                    </widget>
+                    <widget class="QWidget" name="page">
+                        <widget class="QCalendarWidget" name="calendarWidget">
+                            <property name="geometry">
+                                <rect>
+                                    <x>350</x>
+                                    <y>200</y>
+                                    <width>272</width>
+                                    <height>181</height>
+                                </rect>
+                            </property>
+                        </widget>
+                    </widget>
                 </widget>
-                <zorder>line_2</zorder>
-                <zorder>s_arrdt</zorder>
-                <zorder>box_velib</zorder>
-                <zorder>s_go</zorder>
-                <zorder>box_tournages</zorder>
-                <zorder>box_wifi</zorder>
-                <zorder>label_3</zorder>
-                <zorder>s_title</zorder>
-            </widget>
-            <widget class="QWidget" name="introduction" native="true">
-                <property name="enabled">
-                    <bool>true</bool>
-                </property>
-                <property name="geometry">
-                    <rect>
-                        <x>140</x>
-                        <y>240</y>
-                        <width>801</width>
-                        <height>251</height>
-                    </rect>
-                </property>
-                <property name="font">
-                    <font>
-                        <pointsize>14</pointsize>
-                    </font>
-                </property>
-                <property name="autoFillBackground">
-                    <bool>false</bool>
-                </property>
-                <widget class="QLabel" name="i_slogan">
-                    <property name="geometry">
-                        <rect>
-                            <x>350</x>
-                            <y>-10</y>
-                            <width>461</width>
-                            <height>121</height>
-                        </rect>
-                    </property>
-                    <property name="font">
-                        <font>
-                            <family>Junicode</family>
-                            <pointsize>19</pointsize>
-                            <weight>50</weight>
-                            <italic>true</italic>
-                            <bold>false</bold>
-                            <underline>false</underline>
-                        </font>
-                    </property>
-                    <property name="text">
-                        <string>Trouvez le lieu de tournage qui vous ressemble !</string>
-                    </property>
-                    <property name="textFormat">
-                        <enum>Qt::AutoText</enum>
-                    </property>
-                    <property name="scaledContents">
-                        <bool>false</bool>
-                    </property>
-                </widget>
-                <widget class="QLabel" name="i_title">
-                    <property name="geometry">
-                        <rect>
-                            <x>10</x>
-                            <y>0</y>
-                            <width>311</width>
-                            <height>91</height>
-                        </rect>
-                    </property>
-                    <property name="font">
-                        <font>
-                            <pointsize>33</pointsize>
-                            <weight>75</weight>
-                            <italic>true</italic>
-                            <bold>true</bold>
-                        </font>
-                    </property>
-                    <property name="text">
-                        <string>Movies'n'Go</string>
-                    </property>
-                    <property name="alignment">
-                        <set>Qt::AlignCenter</set>
-                    </property>
-                </widget>
-                <widget class="Line" name="_iseparator">
-                    <property name="geometry">
-                        <rect>
-                            <x>310</x>
-                            <y>-10</y>
-                            <width>16</width>
-                            <height>121</height>
-                        </rect>
-                    </property>
-                    <property name="orientation">
-                        <enum>Qt::Vertical</enum>
-                    </property>
-                </widget>
-                <widget class="QPushButton" name="pushButton_2">
-                    <property name="geometry">
-                        <rect>
-                            <x>320</x>
-                            <y>160</y>
-                            <width>141</width>
-                            <height>31</height>
-                        </rect>
-                    </property>
-                    <property name="text">
-                        <string>Chercher</string>
-                    </property>
-                </widget>
-                <zorder>i_slogan</zorder>
-                <zorder>i_title</zorder>
-                <zorder>_iseparator</zorder>
-                <zorder>search</zorder>
-                <zorder>pushButton_2</zorder>
             </widget>
         </widget>
         <widget class="QMenuBar" name="menubar">
@@ -326,98 +461,34 @@
             </hints>
         </connection>
         <connection>
-            <sender>actionEffectuer_une_recherche</sender>
-            <signal>activated()</signal>
-            <receiver>introduction</receiver>
-            <slot>close()</slot>
+            <sender>box_films</sender>
+            <signal>clicked(bool)</signal>
+            <receiver>film_all</receiver>
+            <slot>setVisible(bool)</slot>
             <hints>
                 <hint type="sourcelabel">
-                    <x>-1</x>
-                    <y>-1</y>
+                    <x>285</x>
+                    <y>132</y>
                 </hint>
                 <hint type="destinationlabel">
-                    <x>395</x>
-                    <y>217</y>
-                </hint>
-            </hints>
-        </connection>
-        <connection>
-            <sender>actionAccueil</sender>
-            <signal>activated()</signal>
-            <receiver>introduction</receiver>
-            <slot>show()</slot>
-            <hints>
-                <hint type="sourcelabel">
-                    <x>-1</x>
-                    <y>-1</y>
-                </hint>
-                <hint type="destinationlabel">
-                    <x>395</x>
-                    <y>217</y>
-                </hint>
-            </hints>
-        </connection>
-        <connection>
-            <sender>actionEffectuer_une_recherche</sender>
-            <signal>activated()</signal>
-            <receiver>search</receiver>
-            <slot>show()</slot>
-            <hints>
-                <hint type="sourcelabel">
-                    <x>-1</x>
-                    <y>-1</y>
-                </hint>
-                <hint type="destinationlabel">
-                    <x>390</x>
-                    <y>517</y>
-                </hint>
-            </hints>
-        </connection>
-        <connection>
-            <sender>actionAccueil</sender>
-            <signal>activated()</signal>
-            <receiver>search</receiver>
-            <slot>close()</slot>
-            <hints>
-                <hint type="sourcelabel">
-                    <x>-1</x>
-                    <y>-1</y>
-                </hint>
-                <hint type="destinationlabel">
-                    <x>390</x>
-                    <y>147</y>
-                </hint>
-            </hints>
-        </connection>
-        <connection>
-            <sender>pushButton_2</sender>
-            <signal>clicked()</signal>
-            <receiver>search</receiver>
-            <slot>show()</slot>
-            <hints>
-                <hint type="sourcelabel">
-                    <x>59</x>
-                    <y>51</y>
-                </hint>
-                <hint type="destinationlabel">
-                    <x>540</x>
+                    <x>480</x>
                     <y>197</y>
                 </hint>
             </hints>
         </connection>
         <connection>
-            <sender>pushButton_2</sender>
+            <sender>s_go</sender>
             <signal>clicked()</signal>
-            <receiver>introduction</receiver>
-            <slot>hide()</slot>
+            <receiver>results</receiver>
+            <slot>show()</slot>
             <hints>
                 <hint type="sourcelabel">
-                    <x>59</x>
-                    <y>51</y>
+                    <x>850</x>
+                    <y>143</y>
                 </hint>
                 <hint type="destinationlabel">
-                    <x>540</x>
-                    <y>392</y>
+                    <x>851</x>
+                    <y>249</y>
                 </hint>
             </hints>
         </connection>
