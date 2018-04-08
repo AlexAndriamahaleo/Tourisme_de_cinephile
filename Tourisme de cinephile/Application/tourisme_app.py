@@ -66,7 +66,9 @@ class Ui_MainWindow(object):
 
         while self.completed < 100:
             self.completed += 0.00001
-            self.progressBar.setValue(self.completed)
+            self.progressBar_films.setValue(self.completed)
+            self.progressBar_velib.setValue(self.completed)
+            self.progressBar_wifi.setValue(self.completed)
 
 
     def setupUi(self, MainWindow):
@@ -214,14 +216,29 @@ class Ui_MainWindow(object):
         self.app_page.addWidget(self.research)
         self.update_sources = QtGui.QWidget()
         self.update_sources.setObjectName(_fromUtf8("update_sources"))
-        self.progressBar = QtGui.QProgressBar(self.update_sources)
-        self.progressBar.setGeometry(QtCore.QRect(140, 250, 771, 71))
-        self.progressBar.setProperty("value", 0)
-        self.progressBar.setOrientation(QtCore.Qt.Horizontal)
-        self.progressBar.setTextDirection(QtGui.QProgressBar.TopToBottom)
-        self.progressBar.setObjectName(_fromUtf8("progressBar"))
+        self.progressBar_wifi = QtGui.QProgressBar(self.update_sources)
+        self.progressBar_wifi.setGeometry(QtCore.QRect(100, 100, 771, 71))
+        self.progressBar_wifi.setProperty("value", 0)
+        self.progressBar_wifi.setOrientation(QtCore.Qt.Horizontal)
+        self.progressBar_wifi.setTextDirection(QtGui.QProgressBar.TopToBottom)
+        self.progressBar_wifi.setObjectName(_fromUtf8("progressBar"))
+
+        self.progressBar_velib = QtGui.QProgressBar(self.update_sources)
+        self.progressBar_velib.setGeometry(QtCore.QRect(100, 225, 771, 71))
+        self.progressBar_velib.setProperty("value", 0)
+        self.progressBar_velib.setOrientation(QtCore.Qt.Horizontal)
+        self.progressBar_velib.setTextDirection(QtGui.QProgressBar.TopToBottom)
+        self.progressBar_velib.setObjectName(_fromUtf8("progressBar"))
+
+        self.progressBar_films = QtGui.QProgressBar(self.update_sources)
+        self.progressBar_films.setGeometry(QtCore.QRect(100, 350, 771, 71))
+        self.progressBar_films.setProperty("value", 0)
+        self.progressBar_films.setOrientation(QtCore.Qt.Horizontal)
+        self.progressBar_films.setTextDirection(QtGui.QProgressBar.TopToBottom)
+        self.progressBar_films.setObjectName(_fromUtf8("progressBar"))
+
         self.pushButton = QtGui.QPushButton(self.update_sources)
-        self.pushButton.setGeometry(QtCore.QRect(440, 370, 141, 31))
+        self.pushButton.setGeometry(QtCore.QRect(400, 500, 141, 31))
         self.pushButton.setObjectName(_fromUtf8("pushButton"))
         self.app_page.addWidget(self.update_sources)
         MainWindow.setCentralWidget(self.centralwidget)
