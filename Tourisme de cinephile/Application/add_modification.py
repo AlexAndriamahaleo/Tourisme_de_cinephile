@@ -13,7 +13,8 @@ def genericOutput(self):
 
     if self.box_films.isChecked() == True:
         print("Vous avez sélectionné des films")
-        print("[", self.titre_input.text(), "] [", self.realisateur_input.text(), "]")
+        print("[", self.titre_input.text(), "] [", self.realisateur_input.text(), "] [", self.type_choice.currentText(),
+              "]")
 
     if self.box_wifi.isChecked() == True:
         print("Des HOTSPOT wifi vous sont proposés")
