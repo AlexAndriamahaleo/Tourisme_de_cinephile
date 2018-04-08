@@ -122,3 +122,4 @@ Tourisme de cinephile/*.db-journal
 *.txt
 !/requirements.txt
 /Tourisme de cinephile/Application/garbage/*
+/Tourisme de cinephile/Application/*.db
