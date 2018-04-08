@@ -61,6 +61,13 @@ class Ui_MainWindow(object):
     def loadData(self):
         self.genericOutput()
 
+    def updateDataBase(self):
+        self.completed = 0
+
+        while self.completed < 100:
+            self.completed += 0.00001
+            self.progressBar.setValue(self.completed)
+
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
@@ -81,7 +88,7 @@ class Ui_MainWindow(object):
         self.introduction = QtGui.QWidget()
         self.introduction.setObjectName(_fromUtf8("introduction"))
         self.i_title = QtGui.QLabel(self.introduction)
-        self.i_title.setGeometry(QtCore.QRect(150, 230, 311, 91))
+        self.i_title.setGeometry(QtCore.QRect(110, 230, 311, 91))
         font = QtGui.QFont()
         font.setPointSize(33)
         font.setBold(True)
@@ -91,7 +98,7 @@ class Ui_MainWindow(object):
         self.i_title.setAlignment(QtCore.Qt.AlignCenter)
         self.i_title.setObjectName(_fromUtf8("i_title"))
         self.i_slogan = QtGui.QLabel(self.introduction)
-        self.i_slogan.setGeometry(QtCore.QRect(490, 220, 461, 121))
+        self.i_slogan.setGeometry(QtCore.QRect(450, 220, 461, 121))
         font = QtGui.QFont()
         font.setFamily(_fromUtf8("Junicode"))
         font.setPointSize(19)
@@ -106,12 +113,12 @@ class Ui_MainWindow(object):
         self.i_slogan.setScaledContents(False)
         self.i_slogan.setObjectName(_fromUtf8("i_slogan"))
         self.i_separator = QtGui.QFrame(self.introduction)
-        self.i_separator.setGeometry(QtCore.QRect(470, 210, 16, 141))
+        self.i_separator.setGeometry(QtCore.QRect(430, 210, 16, 141))
         self.i_separator.setFrameShape(QtGui.QFrame.VLine)
         self.i_separator.setFrameShadow(QtGui.QFrame.Sunken)
         self.i_separator.setObjectName(_fromUtf8("i_separator"))
         self.i_search = QtGui.QPushButton(self.introduction)
-        self.i_search.setGeometry(QtCore.QRect(460, 390, 141, 31))
+        self.i_search.setGeometry(QtCore.QRect(410, 380, 141, 31))
         self.i_search.setObjectName(_fromUtf8("i_search"))
         self.app_page.addWidget(self.introduction)
         self.research = QtGui.QWidget()
@@ -213,6 +220,9 @@ class Ui_MainWindow(object):
         self.progressBar.setOrientation(QtCore.Qt.Horizontal)
         self.progressBar.setTextDirection(QtGui.QProgressBar.TopToBottom)
         self.progressBar.setObjectName(_fromUtf8("progressBar"))
+        self.pushButton = QtGui.QPushButton(self.update_sources)
+        self.pushButton.setGeometry(QtCore.QRect(440, 370, 141, 31))
+        self.pushButton.setObjectName(_fromUtf8("pushButton"))
         self.app_page.addWidget(self.update_sources)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
@@ -260,6 +270,7 @@ class Ui_MainWindow(object):
         MainWindow.s_go.clicked.connect(lambda: self.loadData())
         self.actionAccueil.activated.connect(lambda: self.app_page.setCurrentIndex(0))
         self.actionMettre_jour_la_base_de_donn_e.activated.connect(lambda: self.app_page.setCurrentIndex(2))
+        MainWindow.pushButton.clicked.connect(lambda: self.updateDataBase())
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -280,6 +291,7 @@ class Ui_MainWindow(object):
         self.titre.setText(_translate("MainWindow", "Titre", None))
         self.realisateur.setText(_translate("MainWindow", "Réalisateur", None))
         self.check_arrdt.setToolTip(_translate("MainWindow", "Avec arrondissement", None))
+        self.pushButton.setText(_translate("MainWindow", "Mettre à jour", None))
         self.menuQuitter.setTitle(_translate("MainWindow", "Options", None))
         self.menuAide.setTitle(_translate("MainWindow", "Aide ?", None))
         self.actionQuitter.setText(_translate("MainWindow", "Quitter", None))

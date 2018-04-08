@@ -8,7 +8,6 @@ import codecs
 import re
 import time
 import sys
-import itertools
 from xml.etree.ElementTree import *
 
 
@@ -67,11 +66,11 @@ def print_execution_time(objet, s, e):
 
 def database_builder(db_name, stream):
     try:
-        data, count_rows = itertools.tee(codecs.iterdecode(stream, 'utf-8'))
+        data_formated = codecs.iterdecode(stream, 'utf-8')
+        data = list(data_formated)
 
         reader = csv.reader(data, delimiter=";")
-        row_stream = csv.reader(count_rows, delimiter=";")
-        row_count = sum(1 for row in row_stream)
+        row_count = sum(1 for row in data)
 
         database = []
 
