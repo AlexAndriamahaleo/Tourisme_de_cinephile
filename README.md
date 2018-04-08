@@ -8,7 +8,4 @@ Otherwise use `python3` to launch script.
 
 Requirements: 
 
-wxPython : 
-`sudo pip install -r requirements.txt`
-
-PyQt 4
+PyQt 4:  `sudo apt-get install python-qt4`

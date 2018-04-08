@@ -26,11 +26,13 @@ except AttributeError:
         return QtGui.QApplication.translate(context, text, disambig)
 
 class Ui_MainWindow(object):
-
     def genericOutput(self):
         connexion = sqlite3.connect("../tourisme_de_cinephile.db")
 
-        arrondissement = self.s_arrdt.value()
+        if self.check_arrdt.isChecked() == True:
+            query = "SELECT * FROM velib_a_paris_et_communes_limitrophes WHERE cp == %s " % (self.s_arrdt.value())
+        else:
+            query = "SELECT * FROM velib_a_paris_et_communes_limitrophes"
 
         if self.box_films.isChecked() == True:
             print("Vous avez sélectionné des films")
@@ -45,7 +47,6 @@ class Ui_MainWindow(object):
 
         print("[", self.s_arrdt.value(), "]")
 
-        query = "SELECT * FROM velib_a_paris_et_communes_limitrophes WHERE cp == %s " % (arrondissement)
         founded = connexion.execute(query)
         res = list(founded)
         self.tableWidget.setColumnCount(len(res[0]))
@@ -58,7 +59,6 @@ class Ui_MainWindow(object):
         connexion.close()
 
     def loadData(self):
-
         self.genericOutput()
 
 
@@ -127,12 +127,12 @@ class Ui_MainWindow(object):
         self.s_title.setAlignment(QtCore.Qt.AlignCenter)
         self.s_title.setObjectName(_fromUtf8("s_title"))
         self.s_arrdt = QtGui.QSpinBox(self.research)
-        self.s_arrdt.setGeometry(QtCore.QRect(570, 60, 131, 31))
+        self.s_arrdt.setGeometry(QtCore.QRect(560, 60, 131, 31))
         self.s_arrdt.setMinimum(75001)
         self.s_arrdt.setMaximum(75099)
         self.s_arrdt.setObjectName(_fromUtf8("s_arrdt"))
         self.box_velib = QtGui.QCheckBox(self.research)
-        self.box_velib.setGeometry(QtCore.QRect(320, 60, 111, 31))
+        self.box_velib.setGeometry(QtCore.QRect(320, 60, 71, 31))
         self.box_velib.setObjectName(_fromUtf8("box_velib"))
         self.s_go = QtGui.QPushButton(self.research)
         self.s_go.setGeometry(QtCore.QRect(760, 60, 111, 31))
@@ -147,7 +147,7 @@ class Ui_MainWindow(object):
         self.box_films.setChecked(False)
         self.box_films.setObjectName(_fromUtf8("box_films"))
         self.box_wifi = QtGui.QCheckBox(self.research)
-        self.box_wifi.setGeometry(QtCore.QRect(440, 60, 111, 31))
+        self.box_wifi.setGeometry(QtCore.QRect(400, 60, 61, 31))
         self.box_wifi.setObjectName(_fromUtf8("box_wifi"))
         self.film_all = QtGui.QGroupBox(self.research)
         self.film_all.setGeometry(QtCore.QRect(150, 110, 561, 111))
@@ -187,15 +187,24 @@ class Ui_MainWindow(object):
         self.tableWidget = QtGui.QTableWidget(self.results)
         self.tableWidget.setGeometry(QtCore.QRect(10, 10, 971, 401))
         self.tableWidget.setRowCount(0)
-        self.tableWidget.setColumnCount(8)
+        self.tableWidget.setColumnCount(0)
         self.tableWidget.setObjectName(_fromUtf8("tableWidget"))
+        self.check_arrdt = QtGui.QRadioButton(self.research)
+        self.check_arrdt.setGeometry(QtCore.QRect(530, 60, 102, 31))
+        self.check_arrdt.setText(_fromUtf8(""))
+        self.check_arrdt.setChecked(False)
+        self.check_arrdt.setObjectName(_fromUtf8("check_arrdt"))
+        self.check_arrdt.raise_()
+        self.s_title.raise_()
+        self.s_arrdt.raise_()
+        self.box_velib.raise_()
+        self.s_go.raise_()
+        self.line_2.raise_()
+        self.box_films.raise_()
+        self.box_wifi.raise_()
+        self.film_all.raise_()
+        self.results.raise_()
         self.app_page.addWidget(self.research)
-        self.page = QtGui.QWidget()
-        self.page.setObjectName(_fromUtf8("page"))
-        self.calendarWidget = QtGui.QCalendarWidget(self.page)
-        self.calendarWidget.setGeometry(QtCore.QRect(350, 200, 272, 181))
-        self.calendarWidget.setObjectName(_fromUtf8("calendarWidget"))
-        self.app_page.addWidget(self.page)
         MainWindow.setCentralWidget(self.centralwidget)
         self.menubar = QtGui.QMenuBar(MainWindow)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1080, 27))
@@ -237,7 +246,6 @@ class Ui_MainWindow(object):
         # MainWindow.s_go.clicked.connect(lambda: self.app_page.setCurrentIndex(0))
         MainWindow.s_go.clicked.connect(lambda: self.loadData())
         MainWindow.actionAccueil.activated.connect(lambda: self.app_page.setCurrentIndex(0))
-
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
 
     def retranslateUi(self, MainWindow):
@@ -246,14 +254,18 @@ class Ui_MainWindow(object):
         self.i_slogan.setText(_translate("MainWindow", "Trouvez le lieu de tournage qui vous ressemble !", None))
         self.i_search.setText(_translate("MainWindow", "Chercher", None))
         self.s_title.setText(_translate("MainWindow", "Movies\'n\'Go", None))
+        self.box_velib.setToolTip(_translate("MainWindow", "Affiche les stations de Vélib", None))
         self.box_velib.setText(_translate("MainWindow", "Velib", None))
         self.s_go.setText(_translate("MainWindow", "GO !!", None))
+        self.box_films.setToolTip(_translate("MainWindow", "Affiche les lieux de tournage", None))
         self.box_films.setText(_translate("MainWindow", "Tournages de films", None))
+        self.box_wifi.setToolTip(_translate("MainWindow", "Affiche les HOTSPOT Wi-fi", None))
         self.box_wifi.setText(_translate("MainWindow", "Wi-Fi", None))
         self.film_all.setTitle(_translate("MainWindow", "Dites nous tout !", None))
         self.type.setText(_translate("MainWindow", "Type", None))
         self.titre.setText(_translate("MainWindow", "Titre", None))
         self.realisateur.setText(_translate("MainWindow", "Réalisateur", None))
+        self.check_arrdt.setToolTip(_translate("MainWindow", "Avec arrondissement", None))
         self.menuQuitter.setTitle(_translate("MainWindow", "Options", None))
         self.menuAide.setTitle(_translate("MainWindow", "Aide ?", None))
         self.actionQuitter.setText(_translate("MainWindow", "Quitter", None))

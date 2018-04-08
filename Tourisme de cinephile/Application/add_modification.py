@@ -6,10 +6,14 @@ import re
 #
 #
 #
+
 def genericOutput(self):
     connexion = sqlite3.connect("../tourisme_de_cinephile.db")
 
-    arrondissement = self.s_arrdt.value()
+    if self.check_arrdt.isChecked() == True:
+        query = "SELECT * FROM velib_a_paris_et_communes_limitrophes WHERE cp == %s " % (self.s_arrdt.value())
+    else:
+        query = "SELECT * FROM velib_a_paris_et_communes_limitrophes"
 
     if self.box_films.isChecked() == True:
         print("Vous avez sélectionné des films")
@@ -24,7 +28,6 @@ def genericOutput(self):
 
     print("[", self.s_arrdt.value(), "]")
 
-    query = "SELECT * FROM velib_a_paris_et_communes_limitrophes WHERE cp == %s " % (arrondissement)
     founded = connexion.execute(query)
     res = list(founded)
     self.tableWidget.setColumnCount(len(res[0]))
