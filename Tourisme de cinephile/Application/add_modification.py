@@ -13,8 +13,8 @@ def genericOutput(self):
 
     if self.box_films.isChecked() == True:
         print("Vous avez sélectionné des films")
-        print("[", self.titre_input.text(), "] [", self.realisateur_input.text(), "] [", self.type_choice.currentText(),
-              "]")
+        print("[", self.titre_input.text(), "] [", self.realisateur_input.text(), "] [",
+              self.type_choice.currentText(), "]")
 
     if self.box_wifi.isChecked() == True:
         print("Des HOTSPOT wifi vous sont proposés")
@@ -28,6 +28,7 @@ def genericOutput(self):
     founded = connexion.execute(query)
     res = list(founded)
     self.tableWidget.setColumnCount(len(res[0]))
+    self.tableWidget.setRowCount(0)
     for row_number, row_data in enumerate(res):
         self.tableWidget.insertRow(row_number)
         for column_number, data in enumerate(row_data):

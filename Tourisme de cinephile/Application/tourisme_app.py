@@ -49,6 +49,7 @@ class Ui_MainWindow(object):
         founded = connexion.execute(query)
         res = list(founded)
         self.tableWidget.setColumnCount(len(res[0]))
+        self.tableWidget.setRowCount(0)
         for row_number, row_data in enumerate(res):
             self.tableWidget.insertRow(row_number)
             for column_number, data in enumerate(row_data):
