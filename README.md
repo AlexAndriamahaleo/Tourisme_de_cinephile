@@ -8,4 +8,4 @@ Otherwise use `python3` to launch script.
 
 Requirements: 
 
-PyQt 4:  `sudo apt-get install python-qt4`
+PyQt 4:  `sudo apt install python-qt4`
