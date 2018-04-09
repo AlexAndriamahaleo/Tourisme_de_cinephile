@@ -51,7 +51,7 @@
                         </rect>
                     </property>
                     <property name="currentIndex">
-                        <number>0</number>
+                        <number>1</number>
                     </property>
                     <widget class="QWidget" name="introduction">
                         <widget class="QLabel" name="i_title">
@@ -201,9 +201,9 @@
                             <property name="geometry">
                                 <rect>
                                     <x>760</x>
-                                    <y>60</y>
-                                    <width>111</width>
-                                    <height>31</height>
+                                    <y>140</y>
+                                    <width>201</width>
+                                    <height>51</height>
                                 </rect>
                             </property>
                             <property name="text">
@@ -391,6 +391,65 @@
                                 <bool>false</bool>
                             </property>
                         </widget>
+                        <widget class="QLineEdit" name="lattitude_input">
+                            <property name="geometry">
+                                <rect>
+                                    <x>780</x>
+                                    <y>50</y>
+                                    <width>161</width>
+                                    <height>31</height>
+                                </rect>
+                            </property>
+                        </widget>
+                        <widget class="QLineEdit" name="longitude_input">
+                            <property name="geometry">
+                                <rect>
+                                    <x>780</x>
+                                    <y>90</y>
+                                    <width>161</width>
+                                    <height>31</height>
+                                </rect>
+                            </property>
+                        </widget>
+                        <widget class="QLabel" name="label">
+                            <property name="geometry">
+                                <rect>
+                                    <x>780</x>
+                                    <y>27</y>
+                                    <width>81</width>
+                                    <height>20</height>
+                                </rect>
+                            </property>
+                            <property name="text">
+                                <string>Géoposition</string>
+                            </property>
+                        </widget>
+                        <widget class="QLabel" name="label_2">
+                            <property name="geometry">
+                                <rect>
+                                    <x>710</x>
+                                    <y>50</y>
+                                    <width>61</width>
+                                    <height>31</height>
+                                </rect>
+                            </property>
+                            <property name="text">
+                                <string>Lattitude</string>
+                            </property>
+                        </widget>
+                        <widget class="QLabel" name="label_3">
+                            <property name="geometry">
+                                <rect>
+                                    <x>710</x>
+                                    <y>90</y>
+                                    <width>61</width>
+                                    <height>31</height>
+                                </rect>
+                            </property>
+                            <property name="text">
+                                <string>Longittude</string>
+                            </property>
+                        </widget>
                         <zorder>check_arrdt</zorder>
                         <zorder>s_title</zorder>
                         <zorder>s_arrdt</zorder>
@@ -401,6 +460,11 @@
                         <zorder>box_wifi</zorder>
                         <zorder>film_all</zorder>
                         <zorder>results</zorder>
+                        <zorder>lattitude_input</zorder>
+                        <zorder>longitude_input</zorder>
+                        <zorder>label</zorder>
+                        <zorder>label_2</zorder>
+                        <zorder>label_3</zorder>
                     </widget>
                     <widget class="QWidget" name="update_sources">
                         <widget class="QProgressBar" name="progressBar">
