@@ -123,3 +123,7 @@ Tourisme de cinephile/*.db-journal
 !/requirements.txt
 /Tourisme de cinephile/Application/garbage/*
 /Tourisme de cinephile/Application/*.db
+/Tourisme de cinephile/ANDRIAMAHALEOAlex-ELYOUSFIAyoub.aux
+/Tourisme de cinephile/ANDRIAMAHALEOAlex-ELYOUSFIAyoub.out
+/Tourisme de cinephile/ANDRIAMAHALEOAlex-ELYOUSFIAyoub.tex
+/Tourisme de cinephile/ANDRIAMAHALEOAlex-ELYOUSFIAyoub.toc
