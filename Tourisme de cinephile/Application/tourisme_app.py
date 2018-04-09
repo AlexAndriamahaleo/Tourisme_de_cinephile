@@ -144,9 +144,6 @@ class buildDBFromCSVFile(object):
 
     def update_db(self, Ui_films, Ui_wifi, Ui_velib):
 
-        # print(Ui_MainWindow_1)
-        # print(Ui_MainWindow_2)
-
         url1 = "http://opendata.paris.fr/explore/dataset/tournagesdefilmsparis2011/download?format=csv"
         url2 = "http://opendata.paris.fr/explore/dataset/liste_des_sites_des_hotspots_paris_wifi/download?format=csv"
         url3 = "http://data.iledefrance.fr/explore/dataset/velib_a_paris_et_communes_limitrophes/download?format=csv"
