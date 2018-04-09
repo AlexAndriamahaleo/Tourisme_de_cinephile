@@ -17,6 +17,27 @@ import sys
 from xml.etree.ElementTree import *
 
 
+class sqlHandler(object):
+    # Connection à la base de donnée
+    def connect_database(self, databaseName_and_path):
+        connexion = sqlite3.connect(databaseName_and_path)
+        curseur = connexion.cursor()
+        return connexion, curseur
+
+    # charger toutes les données de la base dans un tableau
+    def select_data(self, curseur, table):
+        curseur.execute("SELECT * FROM %s" % (table))
+        resultat = curseur.fetchall()
+        return resultat
+
+    # Extraire des données specifique du table à l'aide du paramètre
+    def select_specific_data(self, curseur, db_view, finale_query):
+        # curseur.execute("SELECT * FROM %s WHERE %s == %s" % (table, columuns, ou))
+        curseur.execute("SELECT * FROM %s %s" % (db_view, finale_query))
+        resultat = list(curseur)
+        return resultat
+
+
 class buildDBFromCSVFile(object):
 
     # Print iterations progress
@@ -172,8 +193,103 @@ class buildDBFromCSVFile(object):
         db_name_3_time = time.time()
         self.print_execution_time(db_name_3, db_name_2_time, db_name_3_time)
 
+        self.dropViews()
+        self.createViews()
+
         end_time = time.time()
         self.print_execution_time("tourisme_de_cinephile", start_time, end_time)
+
+    def createViews(self):
+        connexion = sqlite3.connect("../tourisme_de_cinephile.db")
+        curseur = connexion.cursor()
+        curseur.execute(
+            "CREATE VIEW IF NOT EXISTS films_paris "
+            "AS "
+            "SELECT titre, realisateur, adresse, "
+            "organisme_demandeur, type_de_tournage, ardt, substr(xy, 1, pos-1) "
+            "AS lattitude, substr(xy, pos+1) "
+            "AS longitude FROM (SELECT *, instr(xy,',') "
+            "AS pos FROM tournagesdefilmsparis2011 WHERE trim(xy) != '' )")
+        connexion.commit()
+        curseur.execute(
+            "CREATE VIEW IF NOT EXISTS wifi_paris AS "
+            "SELECT nom_site, adresse, code_site, arrondissement, "
+            "substr(geo_point_2d, 1, pos-1) AS lattitude, "
+            "substr(geo_point_2d, pos+1) AS longitude "
+            "FROM (SELECT *, instr(geo_point_2d,',') AS pos "
+            "FROM liste_des_sites_des_hotspots_paris_wifi "
+            "WHERE trim(geo_point_2d) != '' )")
+        connexion.commit()
+        curseur.execute(
+            "CREATE VIEW IF NOT EXISTS velib_paris "
+            "AS SELECT name, adresse, cp, "
+            "substr(wgs84, 1, pos-1) AS lattitude, "
+            "substr(wgs84, pos+1) AS longitude "
+            "FROM (SELECT *, instr(wgs84,',') AS pos "
+            "FROM velib_a_paris_et_communes_limitrophes "
+            "WHERE trim(wgs84) != '' )")
+        connexion.commit()
+        curseur.execute(
+            "CREATE VIEW IF NOT EXISTS movies_velib AS "
+            "SELECT DISTINCT name "
+            "AS Nom_de_la_station, velib.adresse "
+            "AS Adresse, lattitude, longitude, cp "
+            "AS arrondissement, realisateur, films.type_de_tournage "
+            "AS type_film FROM velib_a_paris_et_communes_limitrophes "
+            "AS velib INNER JOIN tournagesdefilmsparis2011 "
+            "AS films "
+            "ON cp == films.ardt "
+            "ORDER BY arrondissement")
+        connexion.commit()
+        curseur.execute(
+            "CREATE VIEW IF NOT EXISTS movies_wifi AS "
+            "SELECT DISTINCT titre "
+            "AS nom_du_film, arrondissement AS ardt, type_de_tournage "
+            "AS type_film, realisateur, nom_site "
+            "AS borne_wifi, wifi.adresse "
+            "AS adresse_wifi, code_site "
+            "AS num_hotspot, geo_point_2d "
+            "AS coordonnees "
+            "FROM liste_des_sites_des_hotspots_paris_wifi "
+            "AS wifi "
+            "INNER JOIN tournagesdefilmsparis2011 "
+            "AS films "
+            "ON arrondissement == ardt "
+            "ORDER BY arrondissement")
+        connexion.commit()
+        curseur.execute(
+            "CREATE VIEW IF NOT EXISTS velib_near_wifi "
+            "AS SELECT DISTINCT velibs.cp, nom_site "
+            "AS nom_wifi, liste_des_sites_des_hotspots_paris_wifi.adresse "
+            "AS  adresse_wifi, velibs.name "
+            "AS velib_name, velibs.adresse "
+            "AS velib_adresse, velibs.wgs84 "
+            "AS velib_geopos "
+            "FROM liste_des_sites_des_hotspots_paris_wifi "
+            "INNER JOIN  velib_a_paris_et_communes_limitrophes "
+            "AS  velibs "
+            "ON arrondissement == cp "
+            "ORDER BY arrondissement")
+        connexion.commit()
+
+        connexion.close()
+
+    def dropViews(self):
+        connexion = sqlite3.connect("../tourisme_de_cinephile.db")
+        curseur = connexion.cursor()
+
+        curseur.execute("DROP VIEW IF EXISTS films_paris")
+        connexion.commit()
+        curseur.execute("DROP VIEW IF EXISTS wifi_paris")
+        connexion.commit()
+        curseur.execute("DROP VIEW IF EXISTS velib_paris")
+        connexion.commit()
+        curseur.execute("DROP VIEW IF EXISTS movies_velib")
+        connexion.commit()
+        curseur.execute("DROP VIEW IF EXISTS movies_wifi")
+        connexion.commit()
+
+        connexion.close()
 
 
 try:
@@ -184,11 +300,14 @@ except AttributeError:
 
 try:
     _encoding = QtGui.QApplication.UnicodeUTF8
+
+
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig, _encoding)
 except AttributeError:
     def _translate(context, text, disambig):
         return QtGui.QApplication.translate(context, text, disambig)
+
 
 class Ui_MainWindow(object):
     def genericOutput(self):
@@ -210,7 +329,8 @@ class Ui_MainWindow(object):
         if self.box_velib.isChecked() == True:
             print("Vous pourrez circuler avec les velib suivant")
 
-        print("[", self.s_arrdt.value(), "]")
+        if self.titre_input.text() != '':
+            print("[", self.s_arrdt.value(), "]")
 
         founded = connexion.execute(query)
         res = list(founded)
@@ -223,12 +343,130 @@ class Ui_MainWindow(object):
                 self.tableWidget.setItem(row_number, column_number, QtGui.QTableWidgetItem(str(data)))
         connexion.close()
 
+    def selectViewForDisplay(self):
+        if self.box_films.isChecked() & self.box_wifi.isChecked():
+            return "movies_wifi", 1
+        elif self.box_films.isChecked() & self.box_velib.isChecked():
+            return "movies_velib", 2
+        elif self.box_films.isChecked():
+            return "films_paris", 3
+        elif self.box_wifi.isChecked():
+            return "wifi_paris", 4
+        elif self.box_velib.isChecked():
+            return "velib_paris", 5
+        else:
+            return "films_paris", 0
+
+    def selectWhereColumns(self, flag, names_columns):
+        selected = []
+
+        if flag == 1:
+            if self.titre_input.text() != '':
+                selected.append([self.titre_input.text().upper(), names_columns[0]])
+            if self.realisateur_input.text() != '':
+                selected.append([self.realisateur_input.text().upper(), names_columns[3]])
+            if self.type_choice.currentText() != 'Tous':
+                selected.append([self.type_choice.currentText(), names_columns[2]])
+            if self.check_arrdt.isChecked():
+                selected.append([self.s_arrdt.value(), names_columns[1]])
+        elif flag == 3:
+            if self.titre_input.text() != '':
+                selected.append([self.titre_input.text().upper(), names_columns[0]])
+            if self.realisateur_input.text() != '':
+                selected.append([self.realisateur_input.text().upper(), names_columns[1]])
+            if self.type_choice.currentText() != 'Tous':
+                selected.append([self.type_choice.currentText(), names_columns[4]])
+            if self.check_arrdt.isChecked():
+                selected.append([self.s_arrdt.value(), names_columns[5]])
+        elif flag == 2:
+            if self.realisateur_input.text() != '':
+                selected.append([self.realisateur_input.text().upper(), names_columns[5]])
+            if self.type_choice.currentText() != 'Tous':
+                selected.append([self.type_choice.currentText(), names_columns[6]])
+            if self.check_arrdt.isChecked():
+                selected.append([self.s_arrdt.value(), names_columns[4]])
+        else:
+            if self.check_arrdt.isChecked():
+                selected.append(self.s_arrdt.value())
+
+        print(selected)
+
+        if selected != []:
+            return selected
+        else:
+            return 0
+
+    def buildQuery(self, list):
+
+        size = len(list)
+
+        final = "WHERE "
+
+        if size > 1:
+            for elt in range(size):
+                final += list[elt][1]
+                final += " LIKE "
+                try:
+                    final += str(int(list[elt][0]))
+                except ValueError:
+                    # final += list[elt][1]
+                    final += "'%"
+                    final += list[elt][0]
+                    final += "%'"
+                if elt != size - 1:
+                    final += " AND "
+        else:
+            final += list[0][1]
+            final += " LIKE "
+            try:
+                final += str(int(list[0][0]))
+            except ValueError:
+                final += "'%"
+                final += list[0][0]
+                final += "%'"
+        print(final)
+
+        return final
+
     def loadData(self):
-        self.genericOutput()
+
+        # self.genericOutput()
+        connect, curseur = self.request.connect_database("../tourisme_de_cinephile.db")
+        db_view, flag_columns = self.selectViewForDisplay()
+        curseur.execute("SELECT * FROM %s" % db_view)
+        # print(db_view, flag_columns)
+        names = list(map(lambda x: x[0], curseur.description))
+        list_query = self.selectWhereColumns(flag_columns, names)
+        # print(list_query, names)
+
+        finale_query = ""
+        if list_query != 0:
+            finale_query = self.buildQuery(list_query)
+
+        query = self.request.select_specific_data(curseur, db_view, finale_query)
+
+        res = list(query)
+
+        print(len(res))
+
+        if len(res) != 0:
+            self.tableWidget.setColumnCount(len(res[0]))
+            self.tableWidget.setRowCount(0)
+            for row_number, row_data in enumerate(res):
+                self.tableWidget.insertRow(row_number)
+                for column_number, data in enumerate(row_data):
+                    # print(column_number)
+                    self.tableWidget.setItem(row_number, column_number, QtGui.QTableWidgetItem(str(data)))
+        else:
+            self.tableWidget.setRowCount(0)
+
+        connect.close()
+
+
+
 
     def updateDataBase(self):
         self.builder.update_db(self.progressBar_films, self.progressBar_wifi, self.progressBar_velib)
-
 
     def setupUi(self, MainWindow):
         MainWindow.setObjectName(_fromUtf8("MainWindow"))
@@ -297,7 +535,7 @@ class Ui_MainWindow(object):
         self.s_arrdt = QtGui.QSpinBox(self.research)
         self.s_arrdt.setGeometry(QtCore.QRect(560, 60, 131, 31))
         self.s_arrdt.setMinimum(75001)
-        self.s_arrdt.setMaximum(75099)
+        self.s_arrdt.setMaximum(93099)
         self.s_arrdt.setObjectName(_fromUtf8("s_arrdt"))
         self.box_velib = QtGui.QCheckBox(self.research)
         self.box_velib.setGeometry(QtCore.QRect(320, 60, 71, 31))
@@ -343,6 +581,7 @@ class Ui_MainWindow(object):
         query_2 = "SELECT DISTINCT type_de_tournage FROM tournagesdefilmsparis2011"
         founded_2 = connexion2.execute(query_2)
         res_2 = list(founded_2)
+        self.type_choice.addItem('Tous')
         for d in res_2:
             self.type_choice.addItem(str(re.sub("[(',)]", '', str(d))))
         connexion2.close()
@@ -449,7 +688,7 @@ class Ui_MainWindow(object):
         MainWindow.pushButton.clicked.connect(lambda: self.updateDataBase())
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         self.builder = buildDBFromCSVFile()
-        # self.builder.main()
+        self.request = sqlHandler()
 
     def retranslateUi(self, MainWindow):
         MainWindow.setWindowTitle(_translate("MainWindow", "Movies\'n\'Go", None))
